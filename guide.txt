@@ -1,0 +1,5 @@
+1. Install VM with ssh + xfce
+2. apt install -y make, ufw
+3. Download the necessary repositories for Debian from the official site Docker: https://docs.docker.com/engine/install/debian/ (Install from a package)
+4. Install the .deb packages. Update the paths in the following example to where you downloaded the Docker packages.
+
