@@ -1,5 +1,25 @@
-1. Install VM with ssh + xfce
-2. apt install -y make, ufw
-3. Download the necessary repositories for Debian from the official site Docker: https://docs.docker.com/engine/install/debian/ (Install from a package)
-4. Install the .deb packages. Update the paths in the following example to where you downloaded the Docker packages.
+1. Install VM with ssh + xfce (21- 1)
+2. login root
+3. apt update
+4. apt install -y make, ufw
+5. Install docker from a package: 
+	-Download the necessary repositories for Debian from the official site Docker: https://docs.docker.com/engine/install/debian/ (Install from a package)
+	-Install the .deb packages. Update the paths in the following example to where you downloaded the Docker packages.
+	-Verify that the Docker Engine installation is successful by running the hello-world image:
+		$ sudo service docker start
+		$ sudo docker run hello-world
+7. Go to non-root user: $ sudo reboot
+8. Add new user to sudo group and docker's group to work with docker from user's account without sudo: 
+	- $ sudo usermod -aG sudo login
+	- $ sudo usermod -aG docker login
+	- $ sudo reboot
+	- $ sudo getent group name_group - for exam
 
+9. Edit /etc/hosts to add your server name to the list of host accepted: 127.0.0.1 login.42.fr
+10. Install docker-compose:
+	-sudo apt-get remove docker-compose;
+	-sudo rm -f /usr/local/bin/docker-compose
+	-sudo curl -L "https://github.com/docker/compose/releases/download/v2.1.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+	-sudo chmod +x /usr/local/bin/docker-compose
+	-docker-compose --version;
+ 
