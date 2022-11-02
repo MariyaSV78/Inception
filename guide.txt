@@ -22,4 +22,26 @@
 	-sudo curl -L "https://github.com/docker/compose/releases/download/v2.1.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 	-sudo chmod +x /usr/local/bin/docker-compose
 	-docker-compose --version;
+11.	Create folder and files
+	-guide (21 -4) without creating a file.sh;
+12. Genetate a self-signed certificate (21-5.1):
+	-sudo apt update -y;
+	-sudo apt install -y wget curl libnss3-tools;
+	-curl -s https://api.github.com/repos/FiloSottile/mkcert/releases/latest| grep browser_download_url | grep linux-amd64 | cut -d '"' -f 4 | wget -qi -
+	- mv mkcert-v*-linux-amd64 mkcert;
+	- chmod a+x mkcert;
+	-sudo mv mkcert /usr/local/bin/;
+	-mkcert --version;
+13. Get a certificate (21-5.3):
+	-cd ~/project/srcs/requirements/tools/;
+	-mkcert <your_nickname>.42.fr;
+	-mv <your_nickname>.42.fr-key.pem <your_nickname>.42.fr.key;
+	-mv <your_nickname>.42.fr.pem <your_nickname>.42.fr.crt;
+
+
+
+
+
+
+
  
