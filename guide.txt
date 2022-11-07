@@ -2,6 +2,7 @@
 2. login root
 3. apt update
 4. apt install -y make, ufw
+4a. generate keygen for github: ssh-keygen -> cat /.ssh/id_rsa.pub
 5. Install docker from a package: 
 	-Download the necessary repositories for Debian from the official site Docker: https://docs.docker.com/engine/install/debian/ (Install from a package)
 	-Install the .deb packages. Update the paths in the following example to where you downloaded the Docker packages.
@@ -38,10 +39,45 @@
 	-mv <your_nickname>.42.fr-key.pem <your_nickname>.42.fr.key;
 	-mv <your_nickname>.42.fr.pem <your_nickname>.42.fr.crt;
 
+	OU
+	in Dockerfile: 
+		#Generate a self certificate
+		RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/ssl/llescure.42.fr.pem -keyout /etc/ssl/llescure.42.fr.key -subj "/C=FR/ST=Paris/L=Paris/O=42 School/OU=llescure/CN=llescure.42.fr"
+
+14. Creation ot the Nginx container
+	-creation Dockfile 
+		-cd ~/project/srcs/requirements/nginx/;
+
+		-nano Dockerfile (21-7.2);
+
+	-creation nginx.conf
 
 
 
+ Commandes docker-compose
+-docker-compose build 		- build, construction de l image
+-docker-compose up 			- fait le build et le run
+-docker-compose up -d 		-  "-d" comme detach, permet de garder le container actif meme si on sort du terminal
+
+-docker-compose config		- check which values are assigned to the environment variables
+-docker-compose ps 			- pour avoir l'etat des services
+-docker-compose start	 	- on redemarre les services
+-docker-compose stop		- on stop les services/containers
+-docker-compose rm  		- suppression
 
 
+Commandes docker (simples) importantes
+-docker pull 				-pulls the docker image from dockerhub
+-docker run	"name of the docker image"		-pulls and start the image/container
+-docker run -d              -detach permet de continuer a travailler sur le terminal
+			-p 				-option pour le port
+docker ps -a 				-all containers not matter if they are running or not 
 
- 
+Restart a container if we made some changes
+
+-docker images				-all the images you have locally
+-docker start
+-docker stop
+-docker ps					-see all the running containers
+
+#docker run -e POSTGRES_PASSWORD=password postgres:9.6 -Lancer une base de donnees postgreSQL

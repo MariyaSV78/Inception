@@ -1,5 +1,14 @@
 https://docs.docker.com/engine/install/debian/
 
+How services work:
+https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/
+
+How To Install Docker Compose on Ubuntu 18.04:
+https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04
+
+The steps  of the Installation Process:
+https://medium.com/swlh/wordpress-deployment-with-nginx-php-fpm-and-mariadb-using-docker-compose-55f59e5c1a
+
 
 github
 https://github.com/vbachele/Inception/blob/main/README.md#definitions
