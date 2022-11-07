@@ -2,7 +2,8 @@
 2. login root
 3. apt update
 4. apt install -y make, ufw
-4a. generate keygen for github: ssh-keygen -> cat /.ssh/id_rsa.pub
+4a. -apt get install git
+	-generate keygen for github: ssh-keygen -> cat /.ssh/id_rsa.pub
 5. Install docker from a package: 
 	-Download the necessary repositories for Debian from the official site Docker: https://docs.docker.com/engine/install/debian/ (Install from a package)
 	-Install the .deb packages. Update the paths in the following example to where you downloaded the Docker packages.
