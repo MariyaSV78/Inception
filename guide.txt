@@ -2,8 +2,6 @@
 2. login root
 3. apt update
 4. apt install -y make, ufw
-4a. -apt get install git
-	-generate keygen for github: ssh-keygen -> cat /.ssh/id_rsa.pub
 5. Install docker from a package: 
 	-Download the necessary repositories for Debian from the official site Docker: https://docs.docker.com/engine/install/debian/ (Install from a package)
 	-Install the .deb packages. Update the paths in the following example to where you downloaded the Docker packages.
@@ -16,42 +14,35 @@
 	- $ sudo usermod -aG docker login
 	- $ sudo reboot
 	- $ sudo getent group name_group - for exam
-
-9. Edit /etc/hosts to add your server name to the list of host accepted: 127.0.0.1 login.42.fr
-10. Install docker-compose:
+9. -apt get install git
+	-generate keygen for github: ssh-keygen -> cat /.ssh/id_rsa.pub
+10. Edit nano /etc/hosts to add your server name to the list of host accepted: 127.0.0.1 login.42.fr
+11. Install docker-compose:
 	-sudo apt-get remove docker-compose;
 	-sudo rm -f /usr/local/bin/docker-compose
 	-sudo curl -L "https://github.com/docker/compose/releases/download/v2.1.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 	-sudo chmod +x /usr/local/bin/docker-compose
 	-docker-compose --version;
-11.	Create folder and files
-	-guide (21 -4) without creating a file.sh;
-12. Genetate a self-signed certificate (21-5.1):
-	-sudo apt update -y;
-	-sudo apt install -y wget curl libnss3-tools;
-	-curl -s https://api.github.com/repos/FiloSottile/mkcert/releases/latest| grep browser_download_url | grep linux-amd64 | cut -d '"' -f 4 | wget -qi -
-	- mv mkcert-v*-linux-amd64 mkcert;
-	- chmod a+x mkcert;
-	-sudo mv mkcert /usr/local/bin/;
-	-mkcert --version;
-13. Get a certificate (21-5.3):
-	-cd ~/project/srcs/requirements/tools/;
-	-mkcert <your_nickname>.42.fr;
-	-mv <your_nickname>.42.fr-key.pem <your_nickname>.42.fr.key;
-	-mv <your_nickname>.42.fr.pem <your_nickname>.42.fr.crt;
+12.	Create folder and files
+	-guide (21 -4) without creating a file.sh
 
-	OU
-	in Dockerfile: 
-		#Generate a self certificate
-		RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/ssl/llescure.42.fr.pem -keyout /etc/ssl/llescure.42.fr.key -subj "/C=FR/ST=Paris/L=Paris/O=42 School/OU=llescure/CN=llescure.42.fr"
-
-14. Creation ot the Nginx container
+15. Creation of the Nginx container
 	-creation Dockfile 
 		-cd ~/project/srcs/requirements/nginx/;
 
 		-nano Dockerfile (21-7.2);
+		-#Generate a self-signed certificate
+		RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/ssl/llescure.42.fr.pem -keyout /etc/ssl/llescure.42.fr.key -subj "/C=FR/ST=Paris/L=Paris/O=42 School/OU=llescure/CN=llescure.42.fr"
 
 	-creation nginx.conf
+	
+15a. Un container Docker doit être build avant d’être lancé.
+	-docker build -t nginx .  (run the command from the folder where Dockerfile is located), -t <name:tag>
+	-docker image ls
+	-docker run -it <image_name>  - run the image: En précisant -it avant le nom de votre image, vous accéderez directement au terminal de votre container à son lancement.
+	-exit
+	-docker rmi <ID> - 
+
 
 
 
