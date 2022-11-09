@@ -13,7 +13,7 @@ RUN	openssl req -x509 -nodes\
 		-keyout /etc/nginx/ssl/msosnova.42.fr.key\
 		-subj "/C=FR/ST=IDF/L=Paris/0=42/OU=42/CN=msosnova.42.fr/UID=msosnova"
 
-RUN mkdir  /var/run/nginx
+RUN mkdir -p /var/run/nginx
 #Open the port
 EXPOSE	443
 
@@ -21,4 +21,4 @@ EXPOSE	443
 COPY	./conf/nginx.conf /etc/nginx/nginx.conf
 
 #Run the configuration
-CMD	["nginx", "-g", "deamon off;"]
+CMD	["nginx", "-g", "daemon off;"]
