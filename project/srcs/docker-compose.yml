@@ -3,30 +3,29 @@ version: '3'
 services:
   nginx:
     container_name: nginx
-#   volumes:
-#    - wp-volume:/var/www/html
-#   depends_on:
+    build: requirements/nginx/.
+#    depends_on:
 #     - wordpress
-    networks:
-      - network
-    build: 
-    context: requirements/nginx
-    image: nginx
-
     ports:
       - "443:443"
-    restart: always
+    networks:
+      - inception
+#    volumes:
+#     - wordpress:/var/www/html
+   restart: always
  
 #  mariadb:
-#    build: ./requirements/mariadb/
-#   image: mariadb
-#    env_file: .env
 #    container_name: mariadb
+#    expose:
+#     - "3306"
+#    build: ./requirements/mariadb
+#    env_file: 
+#     - .env
 #    networks:
 #     - inception
 #   volumes:
-#     - db-volume:/var/lib/mysql
-#   restart: always
+#     - mariadb:/var/lib/mysql
+#   restart: unless-stopped
 
 #  wordpress:
 #    build: ./requirements/wordpress/
@@ -55,6 +54,7 @@ services:
 #      type: none
 #      device: /home/${USER}/data/mariadb
 
-#networks:
-#    inception:
-#        driver: bridge
+networks:
+    inception:
+
+       

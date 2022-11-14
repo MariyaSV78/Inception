@@ -1,60 +1,38 @@
-BLACK		:= $(shell tput -Txterm setaf 0)
-RED			:= $(shell tput -Txterm setaf 1)
-GREEN		:= $(shell tput -Txterm setaf 2)
-YELLOW		:= $(shell tput -Txterm setaf 3)
-LIGHTPURPLE	:= $(shell tput -Txterm setaf 4)
-PURPLE		:= $(shell tput -Txterm setaf 5)
-BLUE		:= $(shell tput -Txterm setaf 6)
-WHITE		:= $(shell tput -Txterm setaf 7)
-RESET		:= $(shell tput -Txterm sgr0)
-
 COMPOSE_FILE=./srcs/docker-compose.yml
 
-all: run
+all: up
 
-run: 
-	@echo "$(GREEN)Building files for volumes ... $(RESET)"
-	@sudo mkdir -p /home/msosnova/data/wordpress
-	@sudo mkdir -p /home/msosnova/data/mysql
-	@echo "$(GREEN)Building containers ... $(RESET)"
-	@docker-compose -f $(COMPOSE_FILE) up --build
+up: 
+	#sudo mkdir -p /home/msosnova/data/wordpress
+	#sudo mkdir -p /home/msosnova/data/mysql
+	docker-compose -f $(COMPOSE_FILE) up -d
 
-up:
-	@echo "$(GREEN)Building files for volumes ... $(RESET)"
-	@sudo mkdir -p /home/msosnova/data/wordpress
-	@sudo mkdir -p /home/msosnova/data/mysql
-	@echo "$(GREEN)Building containers in background ... $(RESET)"
-	@docker-compose -f $(COMPOSE_FILE) up -d --build
+down:
+	docker-compose -f $(COMPOSE_FILE) down
 
-debug:
-	@echo "$(GREEN)Building files for volumes ... $(RESET)"
-	@sudo mkdir -p /home/msosnova/data/wordpress
-	@sudo mkdir -p /home/msosnova/data/mysql
-	@echo "$(GREEN)Building containers with log information ... $(RESET)"
-	@docker-compose -f $(COMPOSE_FILE) --verbose up
+clean: down
+	docker system prune --all --force --volumes
 
-list:	
-	@echo "$(PURPLE)Listing all containers ... $(RESET)"
-	 docker ps -a
+fclean: clean
+	sudo rm -rf /home/msosnova/data/*
 
-list_volumes:
-	@echo "$(PURPLE)Listing volumes ... $(RESET)"
-	docker volume ls
+re:	clean up
 
-clean: 	
-	@echo "$(RED)Stopping containers ... $(RESET)"
-	@docker-compose -f $(COMPOSE_FILE) down
-	@-docker stop `docker ps -qa`
-	@-docker rm `docker ps -qa`
-	@echo "$(RED)Deleting all images ... $(RESET)"
-	@-docker rmi -f `docker images -qa`
-	@echo "$(RED)Deleting all volumes ... $(RESET)"
-	@-docker volume rm `docker volume ls -q`
-	@echo "$(RED)Deleting all network ... $(RESET)"
-	@-docker network rm `docker network ls -q`
-	@echo "$(RED)Deleting all data ... $(RESET)"
-	@sudo rm -rf /home/msosnova/data/wordpress
-	@sudo rm -rf /home/msosnova/data/mysql
-	@echo "$(RED)Deleting all $(RESET)"
+restart: 	
+	docker stop `docker ps -qa`\
+	&& docker rm `docker ps -qa`\ 
+	&& docker rmi -f `docker images -qa`\
+	&& docker volume rm `docker volume ls -q`\
+	&& docker network rm `docker network ls -q`
 
-.PHONY: run up debug list list_volumes clean
+show:
+	docker container ps -a
+
+voume_show:
+	cd /home/msosnova/data && ls -l **
+
+volume_del:
+	sudo rm -rf /home/msosnova/data/*
+
+
+.PHONY: up down clean fclean re restart show volume_show volume_del
