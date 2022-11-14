@@ -46,6 +46,16 @@
 	-docker rm $(docker ps -aq)
 	-docker run -p 443:443 <image_name>
 
+!!! 
+	docker stop $(docker ps -qa)
+	docker rm $(docker ps -qa)
+	docker rmi -f $(docker images -qa)
+	docker volume rm $(docker volme ls -q)
+	docker network rm $(docker network ls -q)
+
+16. run container from docker-compose:
+	-docke-compose up -d
+
 
 
 
