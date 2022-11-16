@@ -1,0 +1,27 @@
+FROM alpine:3.15
+
+ARG MDB_DATABASE \
+	MDB_USER \
+	MDB_PASS \
+	MDB_ROOTPASS
+
+RUN apk update && apk add --no-cache mariadb mariadb-client 
+
+RUN mkdir /var/run/mysqld \
+	&& chmod 777 /var/run/mysqld
+RUN chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
+	&& chown -R mysql:mysql /var/run/mysqld/mysqld.sock \
+	&& chown -R mysql:mysql /var/run/mysqld/mysqld.pid \
+	&& chmod -R 644 /var/run/mysqld/mysqld.sock \
+
+COPY ./conf/mdb.cnf /etc/mysql/mariadb.conf.d/mdb.cnf
+
+COPY ./tools/create_db.sh .
+
+ENTRYPOINT ["create_db.sh"]
+
+EXPOSE 3306
+
+#CMD [ "mysqld", "--bind-address=0.0.0.0"]
+
+CMD ["mysqld_safe"]

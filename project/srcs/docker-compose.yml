@@ -14,18 +14,24 @@ services:
 #     - wordpress:/var/www/html
    restart: always
  
-#  mariadb:
-#    container_name: mariadb
-#    expose:
-#     - "3306"
-#    build: ./requirements/mariadb
-#    env_file: 
-#     - .env
-#    networks:
-#     - inception
-#   volumes:
-#     - mariadb:/var/lib/mysql
-#   restart: unless-stopped
+  mariadb:
+    container_name: mariadb
+    expose:
+     - "3306"
+    build:       
+      context: ./requirements/mariadb
+      args:
+        MDB_DATABASE: ${MDB_DATABASE}
+        MDB_USER: ${MDB_USER}
+        MDB_PASS: ${MDB_PASS}
+        MDB_ROOT_PASS: ${MDB_ROOT_PASS}
+    env_file: 
+     - .env
+    networks:
+     - inception
+    volumes:
+     - mariadb:/var/lib/mysql
+    restart: always
 
 #  wordpress:
 #    build: ./requirements/wordpress/
