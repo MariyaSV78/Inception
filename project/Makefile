@@ -36,14 +36,6 @@ show:
 
 
 #-------------------------------------------------------------------------
-nginx:
-	docker exec -it nginx bash -l
-
-mariadb:
-	docker exec -it mariadb bash -l
-
-wordpress:
-	docker exec -it wordpress bash -l
 
 up_nginx:
 	cd srcs && sudo docker-compose up --build nginx
