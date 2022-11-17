@@ -9,11 +9,10 @@ RUN apk update && apk add --no-cache mariadb mariadb-client
 
 RUN mkdir /var/run/mysqld \
 	&& chmod 777 /var/run/mysqld
-RUN chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
 	
-COPY ./conf/mdb.cnf /etc/mysql/mariadb.conf.d/mdb.cnf
+COPY conf/mdb.cnf /etc/mysql/mariadb.conf.d/mdb.cnf
 
-COPY ./tools/create_db.sh .
+COPY tools/create_db.sh .
 
 ENTRYPOINT ["create_db.sh"]
 
