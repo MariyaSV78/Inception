@@ -15,8 +15,8 @@ services:
     restart: always
  
   mariadb:
-    container_name: mariadb
-    expose:
+   container_name: mariadb
+   expose:
       - "3306"
     build:       
       context: ./requirements/mariadb
@@ -54,11 +54,11 @@ services:
 #      type: none
 #      device: /home/${USER}/data/wordpress
 
-#  db-volume:
-#    driver_opts:
-#      o: bind
-#      type: none
-#      device: /home/${USER}/data/mariadb
+  mariadb:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/msosnova/data/
 
 networks:
   inception:

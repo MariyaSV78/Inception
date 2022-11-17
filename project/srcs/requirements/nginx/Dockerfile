@@ -10,7 +10,7 @@ RUN	mkdir -p  /etc/nginx/ssl
 
 #Generate a self certificate
 RUN	openssl req -x509 -nodes\
-		-out /etc/nginx/ssl/msosnova.42.fr.pem \
+		-out /etc/nginx/ssl/msosnova.42.fr.crt \
 		-keyout /etc/nginx/ssl/msosnova.42.fr.key \
 		-subj "/C=FR/ST=IDF/L=Paris/0=42/OU=42/CN=msosnova.42.fr/UID=msosnova"
 
@@ -21,8 +21,8 @@ RUN mkdir -p /var/run/nginx
 COPY	./conf/nginx.conf /etc/nginx/nginx.conf
 
 # Assured access to the folder where the site will be contained
-RUN chmod 755 /var/www/html 
-RUN chown -R www-data:www-data /var/www/html
+#RUN mkdir -p /var/www/html && chmod 755 /var/www/html 
+#RUN chown -R www-data:www-data /var/www/html
 
 #Open the port
 EXPOSE	443

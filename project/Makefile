@@ -4,11 +4,11 @@ all: up
 
 up: 
 	cd srcs && sudo service docker restart \
-	&& docker-compose -f $(COMPOSE_FILE) build \
-	&& docker-compose -f $(COMPOSE_FILE) up -d
+	&& docker-compose -f docker-compose.yml build \
+	&& docker-compose -f docker-compose.yml up -d
 
 down:
-	cd srcs && docker-compose -f $(COMPOSE_FILE) down
+	cd srcs && docker-compose -f docker-compose.yml down
 
 clean:
 	cd srcs && docker-compose -f $(COMPOSE_FILE) down \
