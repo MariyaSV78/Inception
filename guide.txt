@@ -53,6 +53,8 @@
 	docker volume rm $(docker volme ls -q)
 	docker network rm $(docker network ls -q)
 
+	sudo service docker restart
+
 // 16. run container from docker-compose:
 	-docke-compose up -d
 
