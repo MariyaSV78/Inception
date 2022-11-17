@@ -12,9 +12,9 @@ RUN mkdir /var/run/mysqld \
 	
 COPY conf/mdb.cnf /etc/mysql/mariadb.conf.d/mdb.cnf
 
-COPY tools/create_db.sh .
+COPY tools/create_db.sh /usr/local/bin/
 
-ENTRYPOINT ["create_db.sh"]
+ENTRYPOINT ["/create_db.sh"]
 
 EXPOSE 3306
 
