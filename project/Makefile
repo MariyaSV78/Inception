@@ -2,7 +2,7 @@ COMPOSE_FILE=./srcs/docker-compose.yml
 
 all: up
 
-up: 
+up:
 	cd srcs && sudo service docker restart \
 	&& docker-compose -f docker-compose.yml build \
 	&& docker-compose -f docker-compose.yml up -d
@@ -11,11 +11,11 @@ down:
 	cd srcs && docker-compose -f docker-compose.yml down
 
 clean:
-	cd srcs && docker-compose -f $(COMPOSE_FILE) down \
+	cd srcs && docker-compose -f docker-compose.yml down \
 	&& docker system prune --force
 
 fclean:
-	docker-compose -f $(COMPOSE_FILE) down \
+	cd srcs && docker-compose -f docker-compose.yml down \
 	&& docker system prune --force \
 	&& docker network prune --force \
 	&& docker volume prune --force\
@@ -23,12 +23,12 @@ fclean:
 
 re:	clean up
 
-restart: 	
-	docker stop $(docker ps -qa)\
-	&& docker rm $(docker ps -a -q)\ 
-	&& docker rmi -f $(docker images -qa)\
-	&& docker volume rm $(docker volume ls -q)\
-	&& docker network rm $(docker network ls -q)
+restart:
+	docker stop `docker ps -qa`
+	docker rm `docker ps -a -q`
+	docker rmi -f `docker images -qa`
+	docker volume rm `docker volume ls -q`
+	#docker network rm `docker network ls -q`
 
 list:
 	docker container ps -a
