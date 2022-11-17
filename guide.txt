@@ -55,7 +55,7 @@
 
 	sudo service docker restart
 
-// 16. run container from docker-compose:
+// 16. run container from docker-compose: //  http://www.yamllint.com/
 	-docke-compose up -d
 
 

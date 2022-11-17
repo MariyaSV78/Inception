@@ -4,20 +4,20 @@ services:
   nginx:
     container_name: nginx
     build: requirements/nginx/.
-#    depends_on:
-#     - wordpress
+    # depends_on:
+    #   - wordpress
     ports:
       - "443:443"
     networks:
-      - inception
-#    volumes:
-#     - wordpress:/var/www/html
-   restart: always
+    - inception
+    # volumes:
+    # - wordpress:/var/www/html 
+    restart: always
  
   mariadb:
     container_name: mariadb
     expose:
-     - "3306"
+      - "3306"
     build:       
       context: ./requirements/mariadb
       args:
@@ -26,11 +26,11 @@ services:
         MDB_PASS: ${MDB_PASS}
         MDB_ROOT_PASS: ${MDB_ROOT_PASS}
     env_file: 
-     - .env
+      - .env
     networks:
-     - inception
+    - inception
     volumes:
-     - mariadb:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     restart: always
 
 #  wordpress:
@@ -61,6 +61,6 @@ services:
 #      device: /home/${USER}/data/mariadb
 
 networks:
-    inception:
+  inception:
 
        
