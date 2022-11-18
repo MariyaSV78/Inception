@@ -12,22 +12,12 @@ RUN mkdir /var/run/mysqld \
 	
 COPY conf/mdb.cnf /etc/mysql/mariadb.conf.d/mdb.cnf
 
-#COPY tools/create_db.sh /usr/local/bin/
+COPY tools/create_db.sh .
 
-#ENTRYPOINT ["/create_db.sh"]
-RUN service mysql start \
-# && chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
-# && chown -R mysql:mysql /var/run/mysqld/mysqld.sock \
-# && chown -R mysql:mysql /var/run/mysqld/mysqld.pid \
-# && chmod -R 644 /var/run/mysqld/mysqld.sock \
-&& mysql -e "CREATE DATABASE IF NOT EXISTS ${MDB_DATABASE};" \
-&& mysql -e "CREATE USER IF NOT EXISTS '${MDB_USER}'@'%' IDENTIFIED by '${MDB_PASS}';" \
-&& mysql -e "GRANT ALL PRIVILEGES ON ${MDB_DATABASE}.* TO '${MDB_ADMIN}'@'%';" \
-&& mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED by '${MDB_ROOT_PASS}';" \
-&& mysql -u root -p ${MDB_ROOT_PASS} -e "FLUSH PRIVILEGES;"
+ENTRYPOINT ["/create_db.sh"]
 
 EXPOSE 3306
 
-#CMD [ "mysqld", "--bind-address=0.0.0.0"]
+CMD [ "mysqld", "--bind-address=mariadb", "--init-file=/init.sql"]
 
-CMD ["mysqld_safe"]
+# CMD ["mysqld_safe"]

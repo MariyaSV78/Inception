@@ -14,24 +14,27 @@ clean:
 	cd srcs && docker-compose -f $(COMPOSE_FILE) down \
 	&& docker system prune --force
 
-fclean: clean
-	docker stop $$(docker ps -qa)
-	docker system prune --all --force --volumes
-	docker network prune --force
-	docker volume prune --force
-	sudo rm -rf /home/msosnova/data/*
+fclean:
+	docker-compose -f $(COMPOSE_FILE) down \
+	&& docker system prune --force \
+	&& docker network prune --force \
+	&& docker volume prune --force\
+	&& sudo rm -rf /home/msosnova/data/*
 
 re:	clean up
 
-#restart: 	
-#	docker stop $(docker ps -qa)\
-#	&& docker rm $(docker ps -qa)\ 
-#	&& docker rmi -f $(docker images -qa)\
+restart: 	
+	docker stop $(docker ps -qa)\
+	&& docker rm $(docker ps -a -q)\ 
+	&& docker rmi -f $(docker images -qa)\
 	&& docker volume rm $(docker volume ls -q)\
 	&& docker network rm $(docker network ls -q)
 
-show:
+list:
 	docker container ps -a
+
+list_volumes: 
+	docker volume ls
 
 
 
@@ -52,7 +55,7 @@ volume_del:
 	sudo rm -rf /home/msosnova/data/*
 
 
-.PHONY: up down clean fclean re show nginx mariadb wordpress \
+.PHONY: up down clean fclean re list list_volumes nginx mariadb wordpress \
 	up_nginx up_mariadb up_wordpress  volume_show volume_del
 
 #sudo mkdir -p /home/msosnova/data/wordpress
