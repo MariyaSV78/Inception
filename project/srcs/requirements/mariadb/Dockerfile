@@ -8,7 +8,7 @@ ARG MDB_DATABASE \
 RUN apk update && apk add --no-cache mariadb mariadb-client 
 
 RUN mkdir /var/run/mysqld \
-	&& chmod 777 /var/run/mysqld
+	&& chmod 777 /var/run/mysqld && chmod 777 
 	
 COPY conf/mdb.cnf /etc/mysql/mariadb.conf.d/mdb.cnf
 
