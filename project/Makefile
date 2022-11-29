@@ -1,20 +1,29 @@
 COMPOSE_FILE=./srcs/docker-compose.yml
+NAME=Inception
 
 all: up
 
+build:
+	@printf ""Launch configuration ${name}...\n"
+	docker-compose -f ./docker-compose.yml up -d --build
+
 up:
+	@printf "Building configuration ${name}...\n"
 	cd srcs && sudo service docker restart \
 	&& docker-compose -f docker-compose.yml build \
 	&& docker-compose -f docker-compose.yml up -d
 
 down:
+	@printf "Stopping configuration ${name}...\n"
 	cd srcs && docker-compose -f docker-compose.yml down
 
 clean:
+	@printf "Cleaning configuration ${name}...\n"	
 	cd srcs && docker-compose -f docker-compose.yml down \
 	&& docker system prune --force
 
 fclean:
+	@printf "Total clean of all configurations docker\n"
 	cd srcs && docker-compose -f docker-compose.yml down \
 	&& docker system prune --force \
 	&& docker network prune --force \
@@ -48,8 +57,8 @@ up_wordpress:
 	cd srcs && sudo docker-compose up --build wordpress
 #-----------------------------------------------------------------------
 
-voume_show:
-	cd /home/msosnova/data && ls -l **
+volume_show:
+	cd /home/msosnova/data && sudo ls -l **
 
 volume_del:
 	sudo rm -rf /home/msosnova/data/*

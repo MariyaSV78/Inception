@@ -58,6 +58,11 @@
 // 16. run container from docker-compose: //  http://www.yamllint.com/
 	-docke-compose up -d
 
+	17.  Creation of the MariaDB container; 
+		- script qui configure base de données devrait lancer le container mariadb sans soucis.
+
+	18.	 Creation of the WordPress container;
+
 
 
 

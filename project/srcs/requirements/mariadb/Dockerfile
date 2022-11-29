@@ -13,12 +13,17 @@ RUN mkdir /var/run/mysqld \
 	
 COPY ./conf/mdb.cnf /etc/mysql/mariadb.conf.d/mdb.cnf
 
-COPY ./tools/create_db.sh /usr/local/bin/
+COPY requirements/mariadb/conf/create_db.sh .
+#/tools/create_db.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/create_db.sh
 
-ENTRYPOINT ["/usr/local/bin/create_db.sh"]
+ENTRYPOINT ["./create_db.sh"]
 
 EXPOSE 3306
 
-CMD [ "mysqld", "--bind-address=0.0.0.0", "--init-file=/init.sql"]
+USER mysql
+
+CMD ["/usr/bin/mysqld", "--skip-log-error"]
+#[ "mysqld", "--bind-address=0.0.0.0", "--init-file=/init.sql"]
 
 # CMD ["mysqld_safe"]
