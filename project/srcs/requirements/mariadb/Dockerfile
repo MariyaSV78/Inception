@@ -13,6 +13,8 @@ RUN chmod 777 /var/run/mysqld
 	
 COPY conf/mdb.cnf /etc/mysql/mariadb.conf.d/mdb.cnf
 
+RUN systemctl start mysql
+
 RUN service mysql start \
 && chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
 && chown -R mysql:mysql /var/run/mysqld/mysqld.sock \
