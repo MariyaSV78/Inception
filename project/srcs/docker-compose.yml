@@ -31,33 +31,34 @@ services:
     - inception
     volumes:
       - mariadb:/var/lib/mysql
-    restart: always
+    restart: unless-stopped
 
   wordpress:
     container_name: wordpress
-    build: ./requirements/wordpress/
-  image: wordpress
+    expose:
+      - "9000"
+    build: ./requirements/wordpress
     env_file: .env
-  depends_on:
-    - mariadb
-  restart: always
-  networks:
-    - inception
-  volumes:
-    - wp-volume:/var/www/wordpress
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+    networks:
+      - inception
+    volumes:
+      - wp-volume:/var/www/wordpress
+   
 
 volumes:
-#  wp-volume:
-#    driver_opts:
-#      o: bind
-#      type: none
-#      device: /home/${USER}/data/wordpress
-
+  wp-volume:
+    driver_opts:
+    o: bind
+    type: none
+    device: /home/msosnova/data/wordpress
   mariadb:
     driver_opts:
-      o: bind
-      type: none
-      device: /home/msosnova/data/
+    o: bind
+    type: none
+    device: /home/msosnova/data/mariadb
 
 networks:
   inception:
