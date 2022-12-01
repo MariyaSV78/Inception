@@ -13,7 +13,7 @@ RUN chmod 777 /var/run/mysqld
 	
 COPY conf/mdb.cnf /etc/mysql/mariadb.conf.d/mdb.cnf
 
-COPY ./mariadb/tools/create_db.sh /usr/local/bin/
+COPY ./tools/create_db.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/create_db.sh
 
 ENTRYPOINT ["./create_db.sh"]
