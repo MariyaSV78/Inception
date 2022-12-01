@@ -3,27 +3,23 @@ NAME=Inception
 
 all: up
 
-build:
-	@printf ""Launch configuration ${name}...\n"
-	docker-compose -f ./docker-compose.yml up -d --build
-
 up:
-	@printf "Building configuration ${name}...\n"
-	cd srcs  \
+#@printf "Building configuration ${name}...\n"
+	cd srcs &&sudo service docker restart \
 	&& docker-compose -f docker-compose.yml build \
 	&& docker-compose -f docker-compose.yml up -d
 
 down:
-	@printf "Stopping configuration ${name}...\n"
+#@printf "Stopping configuration ${name}...\n"
 	cd srcs && docker-compose -f docker-compose.yml down
 
 clean:
-	@printf "Cleaning configuration ${name}...\n"	
+#@printf "Cleaning configuration ${name}...\n"	
 	cd srcs && docker-compose -f docker-compose.yml down \
 	&& docker system prune --force
 
 fclean:
-	@printf "Total clean of all configurations docker\n"
+#@printf "Total clean of all configurations docker\n"
 	cd srcs && docker-compose -f docker-compose.yml down \
 	&& docker system prune --force \
 	&& docker network prune --force \
@@ -34,7 +30,6 @@ re:	clean up
 
 stop:
 	docker stop `docker ps -qa`
-	&& sudo service docker restart
 
 restart:
 	docker rm `docker ps -a -q`
@@ -67,8 +62,8 @@ volume_del:
 	sudo rm -rf /home/msosnova/data/*
 
 
-.PHONY: up down clean fclean re list list_volumes nginx mariadb wordpress \
-	up_nginx up_mariadb up_wordpress  volume_show volume_del
+.PHONY: up down clean fclean re stop restart list list_volumes nup_ginx up_mariadb up_wordpress \
+	volume_show volume_del
 
 #sudo mkdir -p /home/msosnova/data/wordpress
 #sudo mkdir -p /home/msosnova/data/mysql
