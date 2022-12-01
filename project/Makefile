@@ -9,7 +9,7 @@ build:
 
 up:
 	@printf "Building configuration ${name}...\n"
-	cd srcs && sudo service docker restart \
+	cd srcs  \
 	&& docker-compose -f docker-compose.yml build \
 	&& docker-compose -f docker-compose.yml up -d
 
@@ -32,8 +32,11 @@ fclean:
 
 re:	clean up
 
-restart:
+stop:
 	docker stop `docker ps -qa`
+	&& sudo service docker restart
+
+restart:
 	docker rm `docker ps -a -q`
 	docker rmi -f `docker images -qa`
 	docker volume rm `docker volume ls -q`
