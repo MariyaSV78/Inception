@@ -30,7 +30,7 @@ services:
     networks:
     - inception
     volumes:
-      - mbd-volume:/var/lib/mysql
+      - mdb-volume:/var/lib/mysql
     restart: unless-stopped
 
   wordpress:
@@ -63,17 +63,3 @@ volumes:
 networks:
   inception:
 
-
-volumes:
-  wp-volume:
-    driver_opts:
-      o: bind
-      type: none
-      device: /home/${USER}/data/wordpress
-
-  db-volume:
-    driver_opts:
-      o: bind
-      type: none
-      device: /home/${USER}/data/mariadb
-       

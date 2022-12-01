@@ -24,4 +24,3 @@ wp cache flush --allow-root
 mkdir /run/php
 
 exec /usr/sbin/php-fpm7.3 -F -R
-
