@@ -1,4 +1,4 @@
-!/bin/ service mysql start;
+#!/bin/bash service mysql start;
 
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${MDB_DATABASE}\`;"
 mysql -e "CREATE USER IF NOT EXISTS \`${MDB_ADMIN}\`@'%' IDENTIFIED BY '${MDB_PASS}';"

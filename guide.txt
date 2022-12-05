@@ -63,7 +63,7 @@
 
 	18.	 Creation of the WordPress container;
 	19. VM - chmod -R 755 /home/msosnova/data/
-	20. su/ 
+	20. su - cd /var/lib/docker chmod -R 777 volume
 
 
 
