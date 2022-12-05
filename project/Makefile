@@ -6,8 +6,8 @@ all: up
 up:
 	@printf "Building configuration ${name}...\n"
 	cd srcs && sudo service docker restart 
-	@sudo mkdir -p /home/msosnova/data/wordpress && chmod -R 755
-	@sudo mkdir -p /home/msosnova/data/mariadb && chmod -R 755
+	@sudo mkdir -p /home/msosnova/data/wordpress
+	@sudo mkdir -p /home/msosnova/data/mariadb
 	cd srcs && docker-compose -f docker-compose.yml build \
 	&& docker-compose -f docker-compose.yml up -d
 
