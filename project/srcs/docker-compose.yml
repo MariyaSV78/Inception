@@ -53,12 +53,12 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/msosnova/data/wordpress
+      device: /home/u_sosnova/data/wordpress
   mariadb:
     driver_opts:
       type: none
       o: bind
-      device: /home/msosnova/data/mariadb
+      device: /home/u_sosnova/data/mariadb
 
 networks:
   inception:

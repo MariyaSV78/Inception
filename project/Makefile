@@ -6,8 +6,10 @@ all: up
 up:
 	@printf "Building configuration ${name}...\n"
 	cd srcs && sudo service docker restart 
-	@sudo mkdir -p /home/msosnova/data/wordpress
-	@sudo mkdir -p /home/msosnova/data/mariadb
+	@sudo mkdir -p ~/data/wordpress
+	@sudo mkdir -p ~/data/mariadb
+# @sudo chmod 777 -R /var/lib/docker/volumes
+
 	cd srcs && docker-compose -f docker-compose.yml build \
 	&& docker-compose -f docker-compose.yml up -d
 
@@ -26,7 +28,7 @@ fclean:
 	&& docker system prune --force \
 	&& docker network prune --force \
 	&& docker volume prune --force\
-	&& sudo rm -rf /home/msosnova/data/*
+	&& sudo rm -rf ~/data/*
 
 re:	clean up
 
@@ -58,10 +60,10 @@ up_wordpress:
 #-----------------------------------------------------------------------
 
 volume_show:
-	cd /home/msosnova/data && sudo ls -l **
+	cd ~/data && sudo ls -l **
 
 volume_del:
-	sudo rm -rf /home/msosnova/data/*
+	sudo rm -rf ~/data/*
 
 
 .PHONY: up down clean fclean re stop restart list list_volumes nup_ginx up_mariadb up_wordpress \

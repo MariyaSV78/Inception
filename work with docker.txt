@@ -50,6 +50,7 @@ sudo docker pull alpine:3.15
 sudo docker run -i -t ubuntu bash
 #or
 sudo docker run -i -t alpine:3.15 sh
+sudo docker exec -it <containerID> sh
 
 
 
@@ -64,4 +65,21 @@ sudo docker images
 
 
 
+
+## copy file to working docker image
+sudo docker ps
+
+# Syntax to Copy from Container to Docker Host  
+docker cp {options} CONTAINER:SRC_PATH DEST_PATH 
+# Syntax to Copy from Docker Host to Container  
+docker cp {options} SRC_PATH CONTAINER:DEST_PATH 
+
+
+	tmp_containers=`docker ps -qa`
+	ifeq ($(tmp_containers),undefined)
+		echo "\$(tmp_containers) is empty"
+	else
+		echo "\$(tmp_containers) is not empty"
+		docker stop $(tmp_containers)
+	endif
 
