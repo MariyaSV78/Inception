@@ -1,6 +1,7 @@
 FROM debian:buster
 
-RUN apt-get update && apt-get upgrade && -y
+RUN apt-get update -y 
+RUN apt-get upgrade -y
 
 RUN apt-get install wget php7.3 php-fpm php-mysql mariadb-client -y
 #RUN rm /etc/php/7.3/fpm/pool.d/www.conf

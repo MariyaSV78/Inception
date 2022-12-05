@@ -15,7 +15,7 @@ COPY conf/mdb.cnf /etc/mysql/mariadb.conf.d/mdb.cnf
 
 RUN systemctl start mysql
 
-COPY /mnt/nfs/homes/msosnova/_ecole_42/Inception/project/srcs/requirements/mariadb/tools/create_db.sh /usr/local/bin/
+COPY /tools/create_db.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/create_db.sh
 
 ENTRYPOINT ["./create_db.sh"]

@@ -1,0 +1,67 @@
+#First, we will need to update the server with the latest version. You can it them by running the following command:
+
+sudo apt update -y
+sudo apt upgrade -y
+
+#we need to install some required packages to your server
+
+sudo apt install -y apt-transport-https software-properties-common ca-certificates curl openssl wget
+
+##Install Docker
+
+#install Docker on your server. By default, the latest version of Docker is not available in the Ubuntu 18.04 server default repository
+
+#First, download and add Docker CE GPG key:
+
+wget https://download.docker.com/linux/ubuntu/gpg
+sudo apt-key add gpg
+
+#Next, add the Docker CE repository to APT:
+
+sudo nano /etc/apt/sources.list.d/docker.list
+deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+#was:
+deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu focal stable
+focal ?
+
+
+#Save and close the file, when you are finished. Then, update the repository:
+
+sudo apt update -y
+
+#install Docker CE
+sudo apt install docker-ce -y
+
+#check the Docker service
+sudo systemctl status docker
+#or
+sudo service docker status
+
+#and sart if needed
+sudo service docker start
+
+##Create a Docker Instance
+#pull Ubuntu image from the Docker public registry:
+sudo docker pull ubuntu
+#or
+sudo docker pull alpine:3.15
+
+#Next, create an Ubuntu instance in a Docker container and attach a bash shell
+sudo docker run -i -t ubuntu bash
+#or
+sudo docker run -i -t alpine:3.15 sh
+
+
+
+#to get the Container ID of running Ubuntu instance:
+sudo docker ps -a
+
+#to save the changes as a new image with name ubuntu-nginx:
+sudo docker commit <dockerContainerID> ubuntu-nginx
+
+#To verify new image is running:
+sudo docker images
+
+
+
+
