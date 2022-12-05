@@ -11,7 +11,8 @@ services:
     networks:
     - inception
     volumes:
-    - wp-volume:/var/www/html 
+    - wordpress: /var/www/html/wordpress
+    env_file: .env
     restart: always
  
   mariadb:
@@ -25,12 +26,11 @@ services:
         MDB_USER: ${MDB_ADMIN}
         MDB_PASS: ${MDB_PASS}
         MDB_ROOT_PASS: ${MDB_ROOT_PASS}
-    env_file: 
-      - .env
+    env_file: .env
     networks:
     - inception
     volumes:
-      - mdb-volume:/var/lib/mysql
+      - mariadb: /var/lib/mysql
     restart: unless-stopped
 
   wordpress:
@@ -45,16 +45,16 @@ services:
     networks:
       - inception
     volumes:
-      - wp-volume:/var/www/wordpress
+      - wordpress: /var/www/html/wordpress
    
 
 volumes:
-  wp-volume:
+  wordpress:
     driver_opts:
       type: none
       o: bind
       device: /home/msosnova/data/wordpress
-  mdb-volume:
+  mariadb:
     driver_opts:
       type: none
       o: bind
@@ -62,4 +62,5 @@ volumes:
 
 networks:
   inception:
+    driver: bridge
 

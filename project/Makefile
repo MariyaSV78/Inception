@@ -4,22 +4,22 @@ NAME=Inception
 all: up
 
 up:
-#@printf "Building configuration ${name}...\n"
+	@printf "Building configuration ${name}...\n"
 	cd srcs &&sudo service docker restart \
 	&& docker-compose -f docker-compose.yml build \
 	&& docker-compose -f docker-compose.yml up -d
 
 down:
-#@printf "Stopping configuration ${name}...\n"
+	@printf "Stopping configuration ${name}...\n"
 	cd srcs && docker-compose -f docker-compose.yml down
 
 clean:
-#@printf "Cleaning configuration ${name}...\n"	
+	@printf "Cleaning configuration ${name}...\n"	
 	cd srcs && docker-compose -f docker-compose.yml down \
 	&& docker system prune --force
 
 fclean:
-#@printf "Total clean of all configurations docker\n"
+	@printf "Total clean of all configurations docker\n"
 	cd srcs && docker-compose -f docker-compose.yml down \
 	&& docker system prune --force \
 	&& docker network prune --force \

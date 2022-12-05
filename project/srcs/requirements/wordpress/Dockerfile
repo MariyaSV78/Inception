@@ -23,6 +23,6 @@ EXPOSE 9000
 
 ENTRYPOINT ["./wp-config.sh"]
 
-CMD [ "php-fpm7.3", "--nodaemonize" ]
+#CMD [ "php-fpm7.3", "--nodaemonize" ]
 
 #RUN		chown -R root:root /var/www/wordpress
