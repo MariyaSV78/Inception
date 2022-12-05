@@ -62,6 +62,9 @@
 		- script qui configure base de données devrait lancer le container mariadb sans soucis.
 
 	18.	 Creation of the WordPress container;
+	19. VM - chmod -R 755 /home/msosnova/data/
+	20. su/ 
+
 
 
 
