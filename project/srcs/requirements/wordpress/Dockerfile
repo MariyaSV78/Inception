@@ -15,10 +15,6 @@ RUN sed -i 's/\/run\/php\/php7.3-fpm.sock/9000/g' /etc/php/7.3/fpm/pool.d/www.co
 COPY ./conf/wp-config.sh ./
 RUN chmod 755 ./wp-config.sh
 
-# RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-# RUN chmod 755 wp-cli.phar
-# RUN mv wp-cli.phar /usr/local/bin/wp
-
 EXPOSE 9000
 
 ENTRYPOINT ["./wp-config.sh"]

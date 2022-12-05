@@ -5,9 +5,11 @@ all: up
 
 up:
 	@printf "Building configuration ${name}...\n"
-	cd srcs &&sudo service docker restart \
-	&& docker-compose -f docker-compose.yml build \
-	&& docker-compose -f docker-compose.yml up -d
+	cd srcs &&sudo service docker restart 
+	@sudo mkdir -p /home/msosnova/data/wordpress
+	@sudo mkdir -p /home/msosnova/data/mysql
+	docker-compose -f docker-compose.yml build 
+	docker-compose -f docker-compose.yml up -d
 
 down:
 	@printf "Stopping configuration ${name}...\n"
