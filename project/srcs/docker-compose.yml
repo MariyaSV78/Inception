@@ -9,12 +9,12 @@ services:
     ports:
       - "443:443"
     networks:
-    - inception
+      - inception
     volumes:
-    - wordpress:/var/www/html/wordpress
+      - wordpress:/var/www/html/wordpress
     env_file: .env
     restart: always
- 
+
   mariadb:
     container_name: mariadb
     expose:
@@ -28,10 +28,11 @@ services:
         MDB_ROOT_PASS: ${MDB_ROOT_PASS}
     env_file: .env
     networks:
-    - inception
+      - inception
     volumes:
       - mariadb:/var/lib/mysql
-    restart: unless-stopped
+    restart: always
+#    restart: unless-stopped
 
   wordpress:
     container_name: wordpress
@@ -53,12 +54,12 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/u_sosnova/data/wordpress
+      device: /home/${USER}/data/wordpress
   mariadb:
     driver_opts:
       type: none
       o: bind
-      device: /home/u_sosnova/data/mariadb
+      device: /home/${USER}/data/mariadb
 
 networks:
   inception:

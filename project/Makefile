@@ -4,27 +4,27 @@ NAME=Inception
 all: up
 
 up:
-	@printf "Building configuration ${name}...\n"
-	cd srcs && sudo service docker restart 
+	@printf "Building configuration ${NAME}...\n"
+	@sudo service docker restart 
 	@sudo mkdir -p ~/data/wordpress
 	@sudo mkdir -p ~/data/mariadb
 # @sudo chmod 777 -R /var/lib/docker/volumes
-
-	cd srcs && docker-compose -f docker-compose.yml build \
+	@cd srcs \
+	&& docker-compose -f docker-compose.yml build \
 	&& docker-compose -f docker-compose.yml up -d
 
 down:
-	@printf "Stopping configuration ${name}...\n"
-	cd srcs && docker-compose -f docker-compose.yml down
+	@printf "Stopping configuration ${NAME}...\n"
+	@cd srcs && docker-compose -f docker-compose.yml down
 
 clean:
-	@printf "Cleaning configuration ${name}...\n"	
-	cd srcs && docker-compose -f docker-compose.yml down \
+	@printf "Cleaning configuration ${NAME}...\n"	
+	@cd srcs && docker-compose -f docker-compose.yml down \
 	&& docker system prune --force
 
 fclean:
 	@printf "Total clean of all configurations docker\n"
-	cd srcs && docker-compose -f docker-compose.yml down \
+	@cd srcs && docker-compose -f docker-compose.yml down \
 	&& docker system prune --force \
 	&& docker network prune --force \
 	&& docker volume prune --force\
@@ -33,13 +33,14 @@ fclean:
 re:	clean up
 
 stop:
-	docker stop `docker ps -qa`
+	@docker stop `docker ps -aq`
 
 restart:
-	docker rm `docker ps -a -q`
-	docker rmi -f `docker images -qa`
-	docker volume rm `docker volume ls -q`
-	docker network rm `docker network ls -q`
+	@docker rm `docker ps -aq`
+	@docker rmi -f `docker images -aq`
+	@docker volume rm `docker volume ls -q`
+	@docker network rm `docker network ls -q`
+
 
 list:
 	docker container ps -a

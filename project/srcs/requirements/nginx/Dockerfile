@@ -19,6 +19,7 @@ RUN mkdir -p /var/run/nginx
 
 #Copy the new configuration inside nginx
 COPY	./conf/nginx.conf /etc/nginx/nginx.conf
+# COPY	./conf/nginx.conf /etc/nginx/http.d/nginx.conf
 
 # Assured access to the folder where the site will be contained
 RUN mkdir -p /var/www/html 

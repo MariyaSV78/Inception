@@ -75,11 +75,17 @@ docker cp {options} CONTAINER:SRC_PATH DEST_PATH
 docker cp {options} SRC_PATH CONTAINER:DEST_PATH 
 
 
-	tmp_containers=`docker ps -qa`
-	ifeq ($(tmp_containers),undefined)
-		echo "\$(tmp_containers) is empty"
-	else
-		echo "\$(tmp_containers) is not empty"
-		docker stop $(tmp_containers)
-	endif
 
+
+Show users MARIADB
+SHOW DATABASES;
+SELECT User FROM mysql.user;
+
+export MDB_DATABASE=wordpress
+export MDB_ROOT_PASS=rootpass
+export MDB_ADMIN=msosnova
+export MDB_PASS=pass
+
+CREATE DATABASE IF NOT EXISTS wordpress;
+CREATE USER IF NOT EXISTS 'msosnova'@'%' IDENTIFIED BY 'pass';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'msosnova'@'%';
