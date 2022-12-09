@@ -38,7 +38,7 @@
 	
 15a. Un container Docker doit être build avant d’être lancé.
 	-docker build -t nginx .  (run the command from the folder where Dockerfile is located), -t <name:tag>
-	-docker image ls
+	-docker images ls
 	-docker run -it <image_name>  - run the image: En précisant -it avant le nom de votre image, vous accéderez directement au terminal de votre container à son lancement.
 	-exit
 	-docker rmi <ID>

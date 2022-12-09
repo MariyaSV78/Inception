@@ -18,7 +18,7 @@ RUN	openssl req -x509 -nodes\
 RUN mkdir -p /var/run/nginx
 
 #Copy the new configuration inside nginx
-COPY	./conf/nginx.conf /etc/nginx/nginx.conf
+COPY	./conf/nginx_copy.conf /etc/nginx/nginx.conf
 # COPY	./conf/nginx.conf /etc/nginx/http.d/nginx.conf
 
 # Assured access to the folder where the site will be contained

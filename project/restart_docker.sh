@@ -38,4 +38,6 @@ then
 else
 	echo "==== Clear NETWORKS ===="
 	docker network rm $NETWORKS
+
+	sudo service docker restart
 fi
