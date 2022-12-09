@@ -48,7 +48,14 @@ list:
 list_volumes: 
 	docker volume ls
 
+enter_nginx:
+	cd srcs && sudo docker container exec -it nginx bash -l
 
+enter_mariadb:
+	cd srcs && sudo docker container exec -it mariadb bash -l
+
+enter_wordpress:
+	cd srcs && sudo docker container exec -it wordpress bash -l
 
 #-------------------------------------------------------------------------
 
