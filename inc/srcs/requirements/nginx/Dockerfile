@@ -1,6 +1,6 @@
 FROM alpine:3.15
 
-LABEL maintainer="okushnir.42.student.fr"
+LABEL maintainer="msosnova.42.student.fr"
 
 RUN apk update && apk upgrade && apk add --no-cache nginx
 

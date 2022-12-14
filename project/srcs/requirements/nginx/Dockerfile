@@ -19,11 +19,12 @@ RUN	openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes\
 RUN mkdir -p /var/www/html \
 	chmod 755 /var/www/html 
 #RUN chown -R www-data:www-data /var/www/html
-COPY conf/nginx.conf /etc/nginx/conf.d/nginx.conf
-#COPY conf/nginx.conf /etc/nginx/http.d/default.conf
+
+#COPY conf/nginx.conf /etc/nginx/conf.d/nginx.conf
+COPY conf/nginx.conf /etc/nginx/http.d/default.conf
 
 #Open the port
-#EXPOSE	443
+EXPOSE	443
 
 #Run the configuration
-CMD	["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
