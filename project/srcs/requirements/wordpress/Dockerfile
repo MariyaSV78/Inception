@@ -10,7 +10,9 @@ RUN /etc/init.d/php7.3-fpm start
 RUN sed -i 's/\/run\/php\/php7.3-fpm.sock/9000/g' /etc/php/7.3/fpm/pool.d/www.conf && \
     wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp && \
-    mkdir -p /var/www
+    mkdir -p /var/www/html/ \ 
+    chmod 777 /var/www/html/
+
 #COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 COPY ./conf/wp-config.sh ./
 RUN chmod 755 ./wp-config.sh
