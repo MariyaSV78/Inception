@@ -32,12 +32,12 @@ else
 	docker volume rm $VOLUMES
 fi
 
-if [ -z "$NETWORKS" ]
-then
-	echo "==== No NETWORKS to clear ===="
-else
-	echo "==== Clear NETWORKS ===="
-	docker network rm $NETWORKS
-
-	sudo service docker restart
-fi
+# if [ -z "$NETWORKS" ]
+# then
+# 	echo "==== No NETWORKS to clear ===="
+# else
+# 	echo "==== Clear NETWORKS ===="
+# 	docker network rm $NETWORKS
+# fi
+	
+sudo service docker restart
