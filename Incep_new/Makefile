@@ -1,3 +1,4 @@
+include ./srcs/.env
 NAME=Inception
 
 all: up
