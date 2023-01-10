@@ -9,7 +9,7 @@ services:
       context: ./requirements/mariadb/
       args:
         MDB_DATABASE: ${MDB_DATABASE}
-        MDB_USER: ${MDB_ADMIN}
+        MDB_USER: ${MDB_USER}
         MDB_PASS: ${MDB_PASS}
         MDB_ROOT_PASS: ${MDB_ROOT_PASS}
     env_file: .env
@@ -26,17 +26,17 @@ services:
     build: ./requirements/wordpress/
     env_file: .env
     environment:
-      - WP_ADMIN=${WP_ADMIN}
-      - WP_ADMIN_PASS=${WP_ADMIN_PASS}
-      - WP_USER=${WP_USER}
-      - WP_USER_PASS=${WP_USER_PASS}
-      - MDB_NAME=${MDB_DATABASE}
-      - MDB_USER=${MDB_USER}
-      - MDB_PASS=${MDB_PASS}
-      - MBD_ROOT_PASS=${MDB_ROOT_PASS}
+      WP_ADMIN: ${WP_ADMIN}
+      WP_ADMIN_PASS: ${WP_ADMIN_PASS}
+      WP_USER: ${WP_USER}
+      WP_USER_PASS: ${WP_USER_PASS}
+      MDB_NAME: ${MDB_DATABASE}
+      MDB_USER: ${MDB_USER}
+      MDB_PASS: ${MDB_PASS}
+      MBD_ROOT_PASS: ${MDB_ROOT_PASS}
     depends_on:
       - mariadb
-    restart: always
+    restart: unless-stopped
     networks:
       - inception
     volumes:
