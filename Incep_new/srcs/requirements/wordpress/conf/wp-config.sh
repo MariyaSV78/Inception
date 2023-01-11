@@ -18,7 +18,7 @@ else
 	wp core install --allow-root --url=${WP_DOMAIN_NAME} --title=${WP_WEBSITE_NAME} --admin_user=${WP_ADMIN} --admin_password=${WP_ADMIN_PASS} --admin_email=${WP_ADMIN_MAIL}
 	wp user create --allow-root ${WP_USER} ${WP_USER_MAIL} --role=author --user_pass=${WP_USER_PASS}
 	wp theme install twentyseventeen --activate --allow-root
-	#wp them update twentyseventeen --allow-root
+	wp them update twentyseventeen --allow-root
 	
 	wp cache flush --allow-root
 fi
